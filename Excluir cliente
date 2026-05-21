@@ -1,22 +1,23 @@
 #include <stdio.h>
 #include <string.h>
 
-#definir MÁXIMO 100
+#define MAX 100
 
 // Estrutura do Cliente
-
 struct Cliente {
     int id;
     char nome[50];
     char telefone[20];
-}
+};
 
 int main() {
+
     struct Cliente clientes[MAX];
+
     int total = 0;
     int opcao = 0;
 
-    enquanto (opcao != 5) {
+    while (opcao != 5) {
 
         printf("\n===== SISTEMA DE CLIENTES =====\n");
         printf("1 - Cadastrar cliente\n");
@@ -27,13 +28,12 @@ int main() {
         printf("Escolha uma opção: ");
 
         scanf("%d", &opcao);
-        getchar(); // Limpar buffer
+        getchar(); // limpar buffer
 
-        // Cadastro Cliente
-        
-        se (opcao == 1) {
+        // Cadastro de Cliente
+        if (opcao == 1) {
 
-            se (total < MÁXIMO) {
+            if (total < MAX) {
 
                 clientes[total].id = total + 1;
 
@@ -49,26 +49,26 @@ int main() {
 
                 printf("Cliente cadastrado com sucesso!\n");
 
-            } outro {
-                printf("Limite de clientes atingidos!\n");
+            } else {
+
+                printf("Limite de clientes atingido!\n");
             }
         }
 
         // Listar Clientes
+        else if (opcao == 2) {
 
-        senão se (opcao == 2) {
-
-            se (total == 0) {
+            if (total == 0) {
 
                 printf("Nenhum cliente cadastrado.\n");
 
-            } outro {
+            } else {
 
                 printf("\n--- LISTA DE CLIENTES ---\n");
 
-                para (int i = 0; i < total; i++) {
+                for (int i = 0; i < total; i++) {
 
-                    printf("ID: %d\n", cliente[i].id);
+                    printf("ID: %d\n", clientes[i].id);
                     printf("Nome: %s\n", clientes[i].nome);
                     printf("Telefone: %s\n", clientes[i].telefone);
                     printf("-------------------------\n");
@@ -77,91 +77,89 @@ int main() {
         }
 
         // Buscar Cliente
-       
-        senão se (opcao == 3) {
+        else if (opcao == 3) {
 
             int idBusca;
             int encontrado = 0;
 
-            printf("Dígito do ID do cliente: ");
+            printf("Digite o ID do cliente: ");
             scanf("%d", &idBusca);
 
-            para (int i = 0; i < total; i++) {
+            for (int i = 0; i < total; i++) {
 
-                se (clientes[i].id == idBusca) {
+                if (clientes[i].id == idBusca) {
 
                     printf("\nCliente encontrado!\n");
-                    printf("ID: %d\n", cliente[i].id);
+                    printf("ID: %d\n", clientes[i].id);
                     printf("Nome: %s\n", clientes[i].nome);
                     printf("Telefone: %s\n", clientes[i].telefone);
 
                     encontrado = 1;
-                    quebrar;
+                    break;
                 }
             }
 
-            se (!encontrado) {
+            if (!encontrado) {
+
                 printf("Cliente não encontrado!\n");
             }
         }
 
         // Excluir Cliente
-        
-        senão se (opcao == 4) {
+        else if (opcao == 4) {
 
             int idExcluir;
             int encontrado = 0;
 
-            se (total == 0) {
+            if (total == 0) {
 
                 printf("Não existem clientes cadastrados.\n");
 
-            } outro {
+            } else {
 
                 printf("Digite o ID do cliente que deseja excluir: ");
                 scanf("%d", &idExcluir);
 
-                para (int i = 0; i < total; i++) {
+                for (int i = 0; i < total; i++) {
 
                     if (clientes[i].id == idExcluir) {
 
                         encontrado = 1;
 
-                        // Mova os registros para preencher o espaço
-                        para (int j = i; j < total - 1; j++) {
+                        // mover registros
+                        for (int j = i; j < total - 1; j++) {
 
                             clientes[j] = clientes[j + 1];
                         }
 
                         total--;
 
-                        // Reorganizar os IDs
-                        para (int j = 0; j < total; j++) {
+                        // reorganizar IDs
+                        for (int j = 0; j < total; j++) {
 
                             clientes[j].id = j + 1;
                         }
 
                         printf("Cliente excluído com sucesso!\n");
-                        quebrar;
+                        break;
                     }
                 }
 
-                se (!encontrado) {
+                if (!encontrado) {
 
                     printf("Cliente com ID %d não encontrado.\n", idExcluir);
                 }
             }
         }
 
-        // Opção Inválida
+        // Opção inválida
+        else if (opcao != 5) {
 
-        senão se (opcao != 5) {
-
-            printf("Opção invalida! Tente novamente.\n");
+            printf("Opção inválida! Tente novamente.\n");
         }
     }
 
     printf("Encerrando o sistema...\n");
 
-    retornar 0;
+    return 0;
 }
